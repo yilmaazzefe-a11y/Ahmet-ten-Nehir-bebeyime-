@@ -18,41 +18,36 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* Fotoğraf çerçevesi */
+        /* Fotoğraf çerçevesi ayarları */
         .photo-box {
-            width: 200px; /* Çerçeveyi biraz daha derli toplu yaptık */
-            height: 200px;
+            width: 190px; /* Azıcık daha küçülttük */
+            height: 190px;
             border-radius: 50%;
             border: 4px solid #fff;
-            overflow: hidden !important; /* Taşmayı önler */
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-            margin-bottom: 10px; /* Kalbe yaklaştırmak için */
+            overflow: hidden !important; /* Fotoğrafın dışarı taşmasını engeller */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            margin-bottom: 12px;
             display: flex; justify-content: center; align-items: center;
             position: relative;
         }
 
         .photo-box img {
-            /* FOTOĞRAFI YUVARLAĞA TAM OTURTMA AYARI: */
-            width: 135%; /* Resmi büyüterek yan boşlukları dolduruyoruz */
-            height: 135%; 
-            object-fit: cover; /* Bu ayar yuvarlağın içini tam sığdırır */
-            
-            /* DÜZELTME: Fotoğrafı sağa ve yukarı kaydırıp tam merkezledik */
-            /* İlk yüzde sağa/sola (arttırırsan sağa kayar), ikinci yüzde yukarı/aşağı */
-            object-position: 55% 45%; 
-            
-            /* Dairesel kırpmayı garantiler */
+            width: 145%; /* Yanlardaki boşluğu kapatmak için resmi büyüttük */
+            height: 145%; 
+            object-fit: cover;
+            /* FOTOĞRAFI SOLA KAYDIRMA: %42 değeri resmi sola çeker */
+            object-position: 42% 45%; 
             border-radius: 50%;
         }
 
-        /* Kalp simgesi ve yazılar */
-        .main-heart { font-size: 50px; margin-bottom: 5px; }
-        h1 { color: white; font-size: 2.2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .love-msg { color: #ff4d4d; font-size: 1.8rem; font-weight: bold; margin-top: 0px; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
+        /* Yazı ve kalp yerleşimi */
+        .main-heart { font-size: 45px; margin-bottom: 5px; }
+        h1 { color: white; font-size: 2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .love-msg { color: #ff4d4d; font-size: 1.6rem; font-weight: bold; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
 
-        /* Uçuşan Kalpler */
+        /* Uçuşan Kalp Animasyonu */
         .heart {
-            position: absolute; color: #ff4d4d; font-size: 25px;
+            position: absolute; color: #ff4d4d; font-size: 22px;
             pointer-events: none; z-index: 1;
             animation: fly linear forwards;
         }
@@ -74,6 +69,7 @@
         <h1>İyi ki doğdun Nehir! 🥳</h1>
         <p class="love-msg">Seni Seviyorum</p>
     </div>
+
     <script>
         function createHeart() {
             const heart = document.createElement('div');
@@ -84,7 +80,7 @@
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 6000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 350);
     </script>
 </body>
 </html>
