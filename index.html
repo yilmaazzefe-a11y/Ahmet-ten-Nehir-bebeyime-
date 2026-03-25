@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>İyi Doğdun Nehir</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(120deg,#ff9a9e,#fad0c4);
+font-family:sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+flex-direction:column;
+}
+
+h1{
+color:white;
+font-size:40px;
+text-align:center;
+z-index:2;
+}
+
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px)}
+100%{transform:translateY(110vh)}
+}
+
+.big-heart{
+font-size:120px;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="big-heart">❤️</div>
+<h1>İyi doğdun Nehir 🎉</h1>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+for(let i=0;i<40;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+}
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function firework(){
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<50;i++){
+particles.push({
+x:x,
+y:y,
+vx:(Math.random()-0.5)*5,
+vy:(Math.random()-0.5)*5,
+life:100
+});
+}
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+p.x+=p.vx;
+p.y+=p.vy;
+p.life--;
+
+ctx.fillStyle="yellow";
+ctx.fillRect(p.x,p.y,3,3);
+
+if(p.life<=0)particles.splice(i,1);
+});
+
+requestAnimationFrame(animate);
+}
+
+setInterval(firework,1000);
+animate();
+</script>
+
+</body>
+</html>
