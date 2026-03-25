@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İyi ki Doğdun Nehir!</title>
     <style>
-        /* Arka plan ve genel yerleşim */
         body, html {
             margin: 0;
             padding: 0;
@@ -35,15 +34,16 @@
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
             margin-bottom: 20px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Yatayda ortalar */
+            align-items: center; /* Dikeyde ortalar */
             background-color: #111;
         }
 
+        /* Düzeltme: Fotoğrafı çerçevenin tam ortasına getirmek için gerekli ayar */
         .photo-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Fotoğrafı çerçevenin içine tam yayar */
+            object-fit: contain; /* Fotoğrafı çerçevenin içine sığdırıp ortalar */
         }
 
         /* Yazı stilleri */
@@ -67,7 +67,6 @@
             position: absolute;
             color: #ff4d4d;
             font-size: 25px;
-            user-select: none;
             pointer-events: none;
             z-index: 1;
             animation: fly linear forwards;
@@ -93,14 +92,12 @@
     </div>
 
     <script>
-        // Kalp oluşturma fonksiyonu
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.opacity = Math.random();
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 6000);
         }
