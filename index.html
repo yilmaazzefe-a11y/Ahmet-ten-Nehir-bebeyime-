@@ -26,13 +26,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
+            position: relative; /* İçindeki resmi kaydırmak için */
         }
 
         .photo-box img {
-            width: 100%; /* Fotoğrafı çerçevenin içine tam sığdırır */
-            height: 100%;
-            object-fit: contain; /* Fotoğrafı çerçevenin içine tam sığdırıp ortalar */
+            /* FOTOĞRAFI BÜYÜTÜP TAM ORTALAMA AYARI */
+            width: 130%; /* Resmi biraz büyüttük ki dikey boşluk kalmasın */
+            height: 130%;
+            object-fit: cover; /* Bu ayar fotoğrafın içini doldurmasını sağlar */
+            object-position: 50% 50%; /* Resmi tam merkeze odakla */
         }
 
         h1 { color: white; font-size: 2.2rem; margin: 10px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
