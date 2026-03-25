@@ -18,13 +18,13 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* Fotoğraf çerçevesi ayarları */
+        /* Fotoğraf çerçevesi */
         .photo-box {
-            width: 190px; /* Azıcık daha küçülttük */
+            width: 190px; 
             height: 190px;
             border-radius: 50%;
             border: 4px solid #fff;
-            overflow: hidden !important; /* Fotoğrafın dışarı taşmasını engeller */
+            overflow: hidden !important; /* Taşmayı önler */
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
             margin-bottom: 12px;
             display: flex; justify-content: center; align-items: center;
@@ -32,15 +32,19 @@
         }
 
         .photo-box img {
-            width: 145%; /* Yanlardaki boşluğu kapatmak için resmi büyüttük */
-            height: 145%; 
+            /* FOTOĞRAFI SOLA KAYDIRMA AYARI: */
+            width: 155%; /* Yanlardaki boşluğu kapatmak için resmi büyüttük */
+            height: 155%; 
             object-fit: cover;
-            /* FOTOĞRAFI SOLA KAYDIRMA: %42 değeri resmi sola çeker */
+            
+            /* DÜZELTME: Fotoğrafı çerçevenin içinden SOLA kaydırdık (%42) */
+            /* İlk yüzde sağa/sola (azaltırsan sola kayar), ikinci yüzde yukarı/aşağı (azaltırsan yukarı kayar) */
             object-position: 42% 45%; 
+            
             border-radius: 50%;
         }
 
-        /* Yazı ve kalp yerleşimi */
+        /* Kalp simgesi ve yazılar */
         .main-heart { font-size: 45px; margin-bottom: 5px; }
         h1 { color: white; font-size: 2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .love-msg { color: #ff4d4d; font-size: 1.6rem; font-weight: bold; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
