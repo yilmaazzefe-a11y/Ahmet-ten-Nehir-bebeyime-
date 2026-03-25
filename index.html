@@ -1,118 +1,143 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>İyi Doğdun Nehir</title>
-<style>
-body{
-margin:0;
-overflow:hidden;
-background:linear-gradient(120deg,#ff9a9e,#fad0c4);
-font-family:sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-flex-direction:column;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seni Seviyorum Nehir!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Arka plan gradyanı - daha yumuşak pembe/turuncu tonları */
+            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Daha modern font */
+            overflow: hidden;
+            color: #333; /* Daha okunabilir koyu yazı rengi */
+            text-align: center;
+        }
 
-h1{
-color:white;
-font-size:40px;
-text-align:center;
-z-index:2;
-}
+        .container {
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Elemanlar arası boşluk */
+        }
 
-.heart{
-position:absolute;
-color:red;
-font-size:20px;
-animation:fall 5s linear infinite;
-}
+        /* Fotoğraf Alanı */
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Yuvarlak fotoğraf */
+            border: 5px solid white; /* Beyaz çerçeve */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden; /* Dışarı taşan kısımları gizle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-@keyframes fall{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(110vh)}
-}
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fotoğrafı kare çerçeveye sığdır */
+        }
 
-.big-heart{
-font-size:120px;
-animation:pulse 1s infinite;
-}
+        /* Ana Kalp Efekti */
+        .main-heart {
+            font-size: 60px; /* Fotoğrafla dengeli olması için küçültüldü */
+            color: #e74c3c;
+            animation: beat 0.8s infinite alternate;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(231, 76, 60, 0.5));
+        }
 
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.2)}
-100%{transform:scale(1)}
-}
+        @keyframes beat {
+            to { transform: scale(1.1); }
+        }
 
-canvas{
-position:absolute;
-top:0;
-left:0;
-}
-</style>
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        /* Yeni Eklenen Yazı Stili */
+        .love-text {
+            font-size: 2rem;
+            margin: 0;
+            color: #e74c3c; /* Kalp kırmızısı */
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Uçuşan Küçük Kalpler */
+        .heart-particle {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 20px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            filter: drop-shadow(0 0 2px rgba(255,77,77,0.3));
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="big-heart">❤️</div>
-<h1>İyi doğdun Nehir 🎉</h1>
+    <div class="container">
+        <div class="photo-container">
+            <img src="nehir_foto.jpg" alt="Nehir'in Fotoğrafı">
+        </div>
 
-<canvas id="fireworks"></canvas>
+        <div class="main-heart">❤️</div>
+        <h1>İyi ki doğdun Nehir! 🥳</h1>
+        
+        <p class="love-text">Seni Seviyorum</p>
+    </div>
 
-<script>
-for(let i=0;i<40;i++){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+3)+"s";
-document.body.appendChild(heart);
-}
+    <script>
+        // Sürekli kalpler oluşturma fonksiyonu
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Biraz daha yavaş uçuş
+            heart.style.opacity = Math.random() * 0.8 + 0.2;
+            heart.style.fontSize = Math.random() * 20 + 12 + 'px';
+            
+            document.body.appendChild(heart);
 
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+            // Ekran dışına çıkınca sil
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
 
-let particles=[];
-
-function firework(){
-let x=Math.random()*canvas.width;
-let y=Math.random()*canvas.height/2;
-
-for(let i=0;i<50;i++){
-particles.push({
-x:x,
-y:y,
-vx:(Math.random()-0.5)*5,
-vy:(Math.random()-0.5)*5,
-life:100
-});
-}
-}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach((p,i)=>{
-p.x+=p.vx;
-p.y+=p.vy;
-p.life--;
-
-ctx.fillStyle="yellow";
-ctx.fillRect(p.x,p.y,3,3);
-
-if(p.life<=0)particles.splice(i,1);
-});
-
-requestAnimationFrame(animate);
-}
-
-setInterval(firework,1000);
-animate();
-</script>
+        // Kalp oluşturma sıklığı
+        setInterval(createHeart, 250);
+    </script>
 
 </body>
 </html>
