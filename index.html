@@ -5,58 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seni Seviyorum Nehir!</title>
     <style>
-        /* Tüm ekranı siyah yap ve içeriği ortala */
-        body {
+        /* Siyah arka plan garantisi */
+        html, body {
+            background-color: #000000 !important;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000000; /* Kesin siyah */
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            color: white;
-            text-align: center;
+            font-family: Arial, sans-serif;
         }
 
-        /* İçerik kutusunu en üste çıkar */
         .container {
             position: relative;
-            z-index: 999; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            z-index: 100;
+            text-align: center;
+            color: white;
         }
 
-        /* Fotoğrafı yuvarlak ve görünür yap */
+        /* Fotoğraf Ayarı */
         .photo-container {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            border: 3px solid white;
             overflow: hidden;
-            margin-bottom: 20px;
-            background-color: #222; /* Fotoğraf yüklenene kadar boş kalmasın */
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
 
         .photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-        }
-
-        .main-heart {
-            font-size: 50px;
-            margin: 10px 0;
-            animation: beat 0.8s infinite alternate;
-        }
-
-        @keyframes beat {
-            to { transform: scale(1.2); }
         }
 
         h1 {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        .love-text {
+            font-size: 1.5rem;
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        /* Kalpler */
+        .heart {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: move linear forwards;
+        }
+
+        @keyframes move {
+            0% { transform: translateY(110vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="photo-container">
+            <img src="nehir_foto.png" alt="Nehir">
+        </div>
+        <div style="font-size: 40px;">❤️</div>
+        <h1>İyi ki doğdun Nehir! 🥳</h1>
+        <p class="love-text">Seni Seviyorum</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
