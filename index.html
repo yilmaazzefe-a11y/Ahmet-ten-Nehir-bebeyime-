@@ -12,11 +12,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Arka plan gradyanı - daha yumuşak pembe/turuncu tonları */
-            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Daha modern font */
+            /* DEĞİŞİKLİK BURADA: Arka planı tamamen siyah yaptık */
+            background-color: black;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
-            color: #333; /* Daha okunabilir koyu yazı rengi */
+            /* Yazı rengini beyaz yaptık ki siyah üzerinde görünsün */
+            color: white;
             text-align: center;
         }
 
@@ -25,17 +26,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px; /* Elemanlar arası boşluk */
+            gap: 15px;
         }
 
-        /* Fotoğraf Alanı */
+        /* Fotoğraf Alanı: Yuvarlak çerçeveyi siyah arka plana uygun hale getirdik */
         .photo-container {
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* Yuvarlak fotoğraf */
-            border: 5px solid white; /* Beyaz çerçeve */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            overflow: hidden; /* Dışarı taşan kısımları gizle */
+            border-radius: 50%; /* Dairesel çerçeve */
+            border: 5px solid rgba(255, 255, 255, 0.8); /* Şık beyaz çerçeve */
+            box-shadow: 0 0 20px rgba(255,255,255,0.3); /* Hafif beyaz parlama */
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,12 +46,12 @@
         .photo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Fotoğrafı kare çerçeveye sığdır */
+            object-fit: cover;
         }
 
-        /* Ana Kalp Efekti */
+        /* Ana Kalp */
         .main-heart {
-            font-size: 60px; /* Fotoğrafla dengeli olması için küçültüldü */
+            font-size: 60px;
             color: #e74c3c;
             animation: beat 0.8s infinite alternate;
             display: inline-block;
@@ -64,18 +65,18 @@
         h1 {
             font-size: 2.8rem;
             margin: 0;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             font-weight: 700;
+            /* Yazı rengi zaten gövdeden beyaz olarak geliyor */
+            text-shadow: 0 0 10px rgba(255,255,255,0.5); /* Hafif yazı parlaması */
         }
 
-        /* Yeni Eklenen Yazı Stili */
+        /* "Seni Seviyorum" Yazısı */
         .love-text {
             font-size: 2rem;
             margin: 0;
-            color: #e74c3c; /* Kalp kırmızısı */
+            color: #e74c3c; /* Kırmızı */
             font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.5); /* Hafif parlama */
             animation: fadeIn 2s ease-in-out;
         }
 
@@ -84,14 +85,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Uçuşan Küçük Kalpler */
+        /* Uçuşan Kalpler - Siyah fonda daha parlak */
         .heart-particle {
             position: absolute;
             color: #ff4d4d;
             font-size: 20px;
             pointer-events: none;
             animation: fall linear forwards;
-            filter: drop-shadow(0 0 2px rgba(255,77,77,0.3));
+            filter: drop-shadow(0 0 5px rgba(255,77,77,0.8)); /* Daha güçlü parlama */
         }
 
         @keyframes fall {
@@ -101,43 +102,4 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <div class="container">
-        <div class="photo-container">
-            <img src="nehir_foto.jpg" alt="Nehir'in Fotoğrafı">
-        </div>
-
-        <div class="main-heart">❤️</div>
-        <h1>İyi ki doğdun Nehir! 🥳</h1>
-        
-        <p class="love-text">Seni Seviyorum</p>
-    </div>
-
-    <script>
-        // Sürekli kalpler oluşturma fonksiyonu
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-particle');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Biraz daha yavaş uçuş
-            heart.style.opacity = Math.random() * 0.8 + 0.2;
-            heart.style.fontSize = Math.random() * 20 + 12 + 'px';
-            
-            document.body.appendChild(heart);
-
-            // Ekran dışına çıkınca sil
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
-        }
-
-        // Kalp oluşturma sıklığı
-        setInterval(createHeart, 250);
-    </script>
-
-</body>
-</html>
+    <link href="
