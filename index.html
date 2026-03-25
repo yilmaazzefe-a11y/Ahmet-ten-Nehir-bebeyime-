@@ -20,7 +20,7 @@
 
         /* Fotoğraf çerçevesi */
         .photo-box {
-            width: 190px; 
+            width: 190px; /* Çerçeve boyutu aynı kaldı */
             height: 190px;
             border-radius: 50%;
             border: 4px solid #fff;
@@ -32,12 +32,12 @@
         }
 
         .photo-box img {
-            /* FOTOĞRAFI SOLA KAYDIRMA AYARI: */
-            width: 155%; /* Yanlardaki boşluğu kapatmak için resmi büyüttük */
-            height: 155%; 
-            object-fit: cover;
+            /* FOTOĞRAFI BİRAZ KÜÇÜLTME AYARI: */
+            width: 135%; /* Resmi biraz küçülttük (155% -> 135%) */
+            height: 135%; 
+            object-fit: cover; /* Bu ayar yuvarlağın içini tam sığdırır */
             
-            /* DÜZELTME: Fotoğrafı çerçevenin içinden SOLA kaydırdık (%42) */
+            /* Fotoğrafı çerçevenin içinden SOLA kaydırdık (%42) */
             /* İlk yüzde sağa/sola (azaltırsan sola kayar), ikinci yüzde yukarı/aşağı (azaltırsan yukarı kayar) */
             object-position: 42% 45%; 
             
