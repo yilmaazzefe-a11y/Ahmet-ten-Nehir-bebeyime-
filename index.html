@@ -13,13 +13,13 @@
             color: white; flex-direction: column;
         }
 
-        /* Hacker Veri Akışı (Sadece başlarken görünür) */
-        .matrix {
+        /* Hacker Veri Akışı (Sadece başlarken görünür - DÜZ İNMEZ, Dağınık) */
+        #matrix {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 10; display: block;
         }
 
-        /* Geri Sayım Kutusu (Düzeltildi: Tam Ortada ve Bozulmaz) */
+        /* Geri Sayım ve Büyük Kalp Kutusu (Düzeltildi: Tam Ortada) */
         #reveal-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -35,7 +35,7 @@
             margin-bottom: 20px;
         }
 
-        /* Sürpriz Yazılar ve Büyük Kalp (Yeri Sabitlendi) */
+        /* Sürpriz Yazılar ve Büyük Kalp (Yeni Düzen) */
         #reveal-text-box {
             display: flex; flex-direction: column; align-items: center;
             opacity: 0;
@@ -112,7 +112,7 @@
     </div>
 
     <script>
-        // Matrix Veri Akışı (Pembe)
+        // Matrix Veri Akışı (Pembe - Dağınık)
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
