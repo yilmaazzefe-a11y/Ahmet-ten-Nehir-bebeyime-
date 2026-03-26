@@ -35,7 +35,7 @@
             margin-bottom: 20px;
         }
 
-        /* Sürpriz Yazılar ve Büyük Kalp (Düzeltildi) */
+        /* Sürpriz Yazılar ve Büyük Kalp (Yeri Sabitlendi) */
         #reveal-text-box {
             display: flex; flex-direction: column; align-items: center;
             opacity: 0;
@@ -46,10 +46,10 @@
             font-size: 3rem; font-weight: bold;
             color: #ff80ab;
             text-shadow: 0 0 15px rgba(255, 128, 171, 0.7);
-            margin-bottom: 15px;
+            margin-bottom: 0px; /* Kalple arasındaki boşluk sıfırlandı */
         }
 
-        /* İstediğin Büyük Pembe Kalp (Yeni Eklendi) */
+        /* Kocaman Pembe Kalp (Yeni Eklendi) */
         #main-big-heart {
             font-size: 150px; /* Çok büyük */
             color: #ff80ab; /* Pembe renk */
@@ -57,7 +57,7 @@
             line-height: 1; margin: 0;
         }
 
-        /* Kutlama Kutusu (Fotoğraflı) (image_26.png'deki Sabit Hali) */
+        /* Kutlama Kutusu (Fotoğraflı) (Sıra Düzenlendi: Kalp, Foto, Yazı) */
         .celebration-box {
             display: none; /* Başlangıçta gizli */
             flex-direction: column; align-items: center; text-align: center;
@@ -66,7 +66,7 @@
 
         .photo-box {
             width: 200px; height: 200px; border-radius: 50%; border: 4px solid #fff; overflow: hidden;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); margin-bottom: 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); margin-top: 15px; margin-bottom: 20px;
             display: flex; justify-content: center; align-items: center;
         }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; }
@@ -101,10 +101,12 @@
     </div>
 
     <div class="celebration-box" id="celebration-box">
+        <div class="main-heart-icon">❤️</div>
+        
         <div class="photo-box">
             <img src="nehir_foto.png" alt="Nehir">
         </div>
-        <div class="main-heart-icon">❤️</div>
+        
         <h1>İyi ki doğdun Nehir! 🥳</h1>
         <p class="love-msg">Seni Seviyorum</p>
     </div>
@@ -166,17 +168,18 @@
                     // Geri sayım bitti, yazıyı ve o büyük kalbi göster
                     revealTextBox.style.opacity = '1';
                     
-                    // "Seni Seviyorum Nehir" yazısı 2.5 saniye kalsın
+                    // "Seni Seviyorum Nehir" yazısı ve kocaman kalp 2.5 saniye kalsın
                     setTimeout(() => {
                         revealContainer.style.display = 'none';
-                        // Son ekran açılır
+                        // Matrix efektini sil (En sona koyduk)
+                        canvas.style.display = 'none';
+                        clearInterval(matrixInterval);
+
+                        // Son ekran açılır (Doğum günü ekranı)
                         celebrationBox.style.display = 'flex';
                         // Uçuşan kalpler başlar
                         setInterval(createHeart, 300);
                         
-                        // Matrix efektini sil (En sona koyduk)
-                        canvas.style.display = 'none';
-                        clearInterval(matrixInterval);
                     }, 2500);
                 }
             }, 1000);
