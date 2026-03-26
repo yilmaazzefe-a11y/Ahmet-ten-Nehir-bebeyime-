@@ -3,63 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sürpriz! Nehir...</title>
+    <title>İyi ki Doğdun Nehir! ❤️</title>
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #000 !important;
             display: flex; justify-content: center; align-items: center;
             overflow: hidden; font-family: 'Segoe UI', 'Courier New', sans-serif;
-            color: white;
-            flex-direction: column;
+            color: white; flex-direction: column;
         }
 
-        /* Hacker Veri Akışı */
+        /* Hacker Veri Akışı (Sadece başlarken görünür) */
         .matrix {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10;
+            z-index: 10; display: block;
         }
 
-        /* Geri Sayım Kutusu */
+        /* Geri Sayım Kutusu (Düzeltildi: Tam Ortada ve Bozulmaz) */
         #reveal-container {
-            display: flex; flex-direction: column; align-items: center;
-            opacity: 0; /* Başlangıçta gizli */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0;
             transition: opacity 1s ease-in-out;
             z-index: 20;
         }
 
         #countdown {
             font-size: 100px; font-weight: bold;
-            color: #ff80ab; /* Pembe renk */
+            color: #ff80ab;
             text-shadow: 0 0 15px #ff80ab;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* Sürpriz Yazılar ve Büyük Kalp (Düzeltildi) */
+        #reveal-text-box {
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
         #love-text {
             font-size: 3rem; font-weight: bold;
             color: #ff80ab;
             text-shadow: 0 0 15px rgba(255, 128, 171, 0.7);
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            margin-bottom: 15px;
         }
 
-        /* Fotoğraf ve Kendi Kutlama Kodu (image_24.png'den) */
+        /* İstediğin Büyük Pembe Kalp (Yeni Eklendi) */
+        #main-big-heart {
+            font-size: 150px; /* Çok büyük */
+            color: #ff80ab; /* Pembe renk */
+            text-shadow: 0 0 30px #ff80ab;
+            line-height: 1; margin: 0;
+        }
+
+        /* Kutlama Kutusu (Fotoğraflı) (image_26.png'deki Sabit Hali) */
         .celebration-box {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: none; /* Başlangıçta gizli */
-            justify-content: center; align-items: center;
-            flex-direction: column;
+            flex-direction: column; align-items: center; text-align: center;
             z-index: 30;
         }
 
-        /* image_24.png'deki fotoğraf ve yazılar */
         .photo-box {
             width: 200px; height: 200px; border-radius: 50%; border: 4px solid #fff; overflow: hidden;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); margin-bottom: 15px;
             display: flex; justify-content: center; align-items: center;
         }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .main-heart-icon { font-size: 50px; margin-bottom: 10px; }
+        
+        .main-heart-icon { font-size: 50px; margin-bottom: 5px; }
         h1 { color: white; font-size: 2.2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .love-msg { color: #ff4d4d; font-size: 1.8rem; font-weight: bold; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
 
@@ -82,7 +94,10 @@
 
     <div id="reveal-container">
         <div id="countdown"></div>
-        <div id="love-text">Seni Seviyorum Nehir ❤️</div>
+        <div id="reveal-text-box">
+            <div id="love-text">Seni Seviyorum Nehir</div>
+            <div id="main-big-heart">❤️</div>
+        </div>
     </div>
 
     <div class="celebration-box" id="celebration-box">
@@ -114,8 +129,6 @@
         function drawMatrix() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // PEMBE RENK AYARI
             ctx.fillStyle = '#ff80ab'; 
             ctx.font = fontSize + 'px Courier New';
 
@@ -131,18 +144,17 @@
         }
         const matrixInterval = setInterval(drawMatrix, 40);
 
-        // Geri Sayım ve Sürpriz
+        // Geri Sayım ve Sürpriz Mantığı
         const revealContainer = document.getElementById('reveal-container');
         const countdownEl = document.getElementById('countdown');
-        const loveTextEl = document.getElementById('love-text');
+        const revealTextBox = document.getElementById('reveal-text-box');
         const celebrationBox = document.getElementById('celebration-box');
         let countdownValue = 3;
 
-        // 3 saniye sonra Matrix başlar (gösterme amaçlı)
+        // 1 saniye sonra Geri Sayım Başlar
         setTimeout(() => {
             revealContainer.style.opacity = '1';
             
-            // Geri Sayım
             countdownEl.textContent = countdownValue;
             const countdownInterval = setInterval(() => {
                 countdownValue--;
@@ -151,22 +163,24 @@
                 } else {
                     clearInterval(countdownInterval);
                     countdownEl.textContent = "";
-                    loveTextEl.style.opacity = '1';
+                    // Geri sayım bitti, yazıyı ve o büyük kalbi göster
+                    revealTextBox.style.opacity = '1';
                     
-                    // "Seni Seviyorum Nehir" yazısı 2 saniye kalsın
+                    // "Seni Seviyorum Nehir" yazısı 2.5 saniye kalsın
                     setTimeout(() => {
-                        // Matrix'i sil ve kutlamayı göster
-                        clearInterval(matrixInterval);
-                        canvas.style.display = 'none';
                         revealContainer.style.display = 'none';
+                        // Son ekran açılır
                         celebrationBox.style.display = 'flex';
-                        
-                        // Uçuşan kalpleri başlat
+                        // Uçuşan kalpler başlar
                         setInterval(createHeart, 300);
-                    }, 2000);
+                        
+                        // Matrix efektini sil (En sona koyduk)
+                        canvas.style.display = 'none';
+                        clearInterval(matrixInterval);
+                    }, 2500);
                 }
             }, 1000);
-        }, 1000); // Sayfa yüklendikten 1 saniye sonra Matrix ve Geri Sayım başlar
+        }, 1000);
 
         // Uçuşan Kalp Fonksiyonu
         function createHeart() {
