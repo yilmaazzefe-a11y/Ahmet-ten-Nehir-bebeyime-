@@ -2,25 +2,41 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Nehir için Sürpriz ❤️</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 1. TÜM SAYFAYI ÇİVİLE (HİÇBİR ŞEY KAYAMAZ) */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-touch-callout: none; /* Metin seçmeyi engelle */
+            -webkit-user-select: none;   /* Metin seçmeyi engelle */
+            user-select: none;           /* Metin seçmeyi engelle */
+            touch-action: none;          /* Dokunma kaydırmasını engelle */
+        }
+
         body, html { 
             width: 100%; height: 100%; background: #000; 
-            overflow: hidden; font-family: 'Arial', sans-serif; 
+            overflow: hidden !important; /* CSS ile kaydırmayı engelle */
+            position: fixed;           /* Sayfayı ekrana sabitle */
+            top: 0; left: 0;
+            font-family: 'Arial', sans-serif; 
+            color: white;
+            /* iPhone çentiği gibi alanları yönetmek için */
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
-        /* 1. HACKER YAZILARI */
+        /* 2. HACKER YAZILARI (Arka Planda Sabit) */
         #matrix-canvas {
             position: fixed; top: 0; left: 0; z-index: 1;
+            width: 100% !important; height: 100% !important;
         }
 
-        /* 2. GERİ SAYIM EKRANI */
+        /* 3. GERİ SAYIM EKRANI (Sabit Ortalanmış) */
         #intro-overlay {
             position: fixed; inset: 0; z-index: 10;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: black;
+            width: 100%; height: 100%;
         }
 
         #num-box { font-size: 100px; color: #ff80ab; font-weight: bold; text-shadow: 0 0 20px #ff80ab; }
@@ -29,13 +45,14 @@
         .pink-text { font-size: 2.5rem; color: #ff80ab; text-shadow: 0 0 20px #ff80ab; text-align: center; padding: 0 10px; }
         .giant-heart { font-size: 120px; color: #ff80ab; margin-top: 10px; filter: drop-shadow(0 0 25px #ff80ab); }
 
-        /* 3. SON EKRAN (TELEFON UYUMLU) */
+        /* 4. SON EKRAN (Telefon Uyumlu, Sabit) */
         #final-page {
             position: fixed; inset: 0; z-index: 20;
             display: none; flex-direction: column; justify-content: center; align-items: center;
-            background: rgba(0, 0, 0, 0.4); 
+            background: rgba(0, 0, 0, 0.5); /* Yazıların görünmesi için hafif karartma */
             text-align: center;
             padding: 20px;
+            width: 100%; height: 100%;
         }
 
         .circle-frame {
@@ -64,7 +81,7 @@
         .final-title { color: white; font-size: 1.8rem; margin-bottom: 8px; text-shadow: 0 0 10px black; }
         .final-sub { color: #ff4d4d; font-size: 1.5rem; font-weight: bold; text-shadow: 0 0 15px #ff4d4d; }
 
-        /* UÇUŞAN KALPLER */
+        /* UÇUŞAN KALPLER (Sabit Ekran İçinde Uçuşur) */
         .rain-heart {
             position: absolute; color: #ff4d4d; pointer-events: none;
             z-index: 15; animation: fall linear forwards;
@@ -84,9 +101,7 @@
         }
     </style>
 </head>
-<body>
-
-    <canvas id="matrix-canvas"></canvas>
+<body scroll="no"> <canvas id="matrix-canvas"></canvas>
 
     <div id="intro-overlay">
         <div id="num-box">3</div>
@@ -106,12 +121,26 @@
     </div>
 
     <script>
+        // 5. JAVASCRIPT İLE KESİN KAYDIRMA ENGELLEME (TELEFON İÇİN)
+        // Dokunma kaydırmasını (scroll) tamamen engelle
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Çift dokunma ile yakınlaştırmayı engelle (zoom)
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Canvas boyutunu CSS ile de zorla
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
