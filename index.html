@@ -33,7 +33,7 @@
         #final-page {
             position: fixed; inset: 0; z-index: 20;
             display: none; flex-direction: column; justify-content: center; align-items: center;
-            background: rgba(0, 0, 0, 0.3); /* Yazıların görünmesi için hafif şeffaf arka plan */
+            background: rgba(0, 0, 0, 0.3); 
             text-align: center;
         }
 
@@ -47,7 +47,8 @@
 
         .circle-frame img {
             width: 150%; height: 150%; object-fit: cover;
-            object-position: 38% 45%; 
+            /* FOTOĞRAF SOLA KAYDIRILDI: 38'den 30'a çekildi */
+            object-position: 30% 45%; 
         }
 
         .red-heart-under { font-size: 70px; margin-bottom: 15px; animation: pulse 1.5s infinite; }
@@ -106,23 +107,20 @@
         const drops = Array(Math.floor(columns)).fill(1);
 
         function drawMatrix() {
-            // Siyah arka planı temizle ama iz bıraksın (0.15 netlik sağlar)
             ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = "#ff80ab"; // Net pembe hacker rengi
+            ctx.fillStyle = "#ff80ab"; 
             ctx.font = "bold " + fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 
-                // Dağınık iniş: Bazıları daha erken başa döner
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) drops[i] = 0;
                 drops[i]++;
             }
         }
-        // Matrix akışını asla durdurmuyoruz
         const mInterval = setInterval(drawMatrix, 50);
 
         let count = 3;
@@ -141,10 +139,8 @@
                 msgGroup.style.display = 'flex';
                 
                 setTimeout(() => {
-                    // İlk siyah perdeyi kaldırıyoruz ama matrix arkada çalışmaya devam ediyor
                     intro.style.display = 'none';
                     finalPage.style.display = 'flex';
-                    // Uçuşan kalpleri başlat
                     setInterval(makeHeart, 150); 
                 }, 2500);
             }
@@ -161,7 +157,6 @@
             setTimeout(() => h.remove(), 4000);
         }
 
-        // Ekran boyutu değişirse canvas'ı güncelle
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
