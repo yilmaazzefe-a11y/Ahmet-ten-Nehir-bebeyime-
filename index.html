@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İyi ki Doğdun Nehir!</title>
     <style>
-        /* Genel sayfa yerleşimi */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #000 !important;
@@ -15,63 +14,46 @@
         }
 
         .main-container {
-            text-align: center;
-            z-index: 100;
-            display: flex; /* İçerikleri dikey hizalamak için */
-            flex-direction: column;
-            align-items: center;
+            text-align: center; z-index: 100;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         /* Fotoğraf çerçevesi ve dairesel kırpma */
         .photo-box {
-            width: 200px; /* Kompakt boyut */
-            height: 200px;
+            /* DÜZELTME: Yuvarlağın ve fotoğrafın boyutunu büyüttük (220px -> 300px) */
+            width: 300px; 
+            height: 300px;
             border-radius: 50%;
-            border: 4px solid #fff;
-            overflow: hidden; /* Taşmayı önler, dairesel kırpmayı garantiler */
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-            
-            /* DÜZELTME: Aşağıdaki öğelerle (kalp, yazı) arasındaki boşluğu azalttık */
-            margin-bottom: 5px; 
-            
+            border: 5px solid #fff; /* Çerçeveyi de azıcık kalınlaştırdık */
+            overflow: hidden !important; /* Taşmayı önler */
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.5); /* Gölgeyi de belirginleştirdik */
+            margin-bottom: 15px; /* Kalbe yaklaştırmak için */
             display: flex; justify-content: center; align-items: center;
-            position: relative; /* İçindeki resmi kaydırmak için */
+            position: relative;
         }
 
         .photo-box img {
-            /* FOTOĞRAFI BÜYÜTÜP TAM ORTALAMA VE KIRPMA AYARI: */
-            width: 135%; /* Yan boşluğu kapatmak için resmi büyüttük */
-            height: 135%; 
-            object-fit: cover; /* Bu ayar fotoğrafın içini doldurmasını sağlar */
+            /* FOTOĞRAFI YUVARLAĞA TAM OTURTMA AYARI */
+            width: 145%; /* Resmi büyüterek yan boşlukları dolduruyoruz */
+            height: 145%; 
+            object-fit: cover; /* Bu ayar yuvarlağın içini tam sığdırır */
             
-            /* Fotoğrafı çerçevenin içinden manuel sağa (%55) ve aşağı (%55) kaydırdık */
-            object-position: 55% 55%; 
-        }
-
-        /* Kalp simgesi yerleşimi */
-        .heart-icon {
-            font-size: 50px;
+            /* Fotoğrafı çerçevenin içinden sağa ve yukarı kaydırıp tam merkezledik */
+            /* İlk yüzde sağa/sola (arttırırsan sağa kayar), ikinci yüzde yukarı/aşağı */
+            object-position: 55% 45%; 
             
-            /* DÜZELTME: Fotoğrafla arasındaki üst boşluğu azalttık */
-            margin-top: -10px;
-            margin-bottom: 5px; /* Yazıyla arasındaki boşluğu kıstık */
+            /* Dairesel kırpmayı garantiler */
+            border-radius: 50%;
         }
 
-        /* Yazı stilleri */
-        h1 { color: white; font-size: 2.2rem; margin: 0 0 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        
-        /* DÜZELTME: "Seni Seviyorum" yazısını yukarı kaydırıp h1 ile yakınlaştırdık */
-        .love-msg { 
-            color: #ff4d4d; 
-            font-size: 1.8rem; 
-            font-weight: bold; 
-            margin-top: 0px; /* Üst boşluğu sıfırladık */
-            text-shadow: 0 0 15px rgba(255,77,77,0.5); 
-        }
+        /* Kalp simgesi ve yazılar */
+        .main-heart { font-size: 55px; margin-bottom: 5px; }
+        h1 { color: white; font-size: 2.5rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .love-msg { color: #ff4d4d; font-size: 2rem; font-weight: bold; margin-top: 0px; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
 
-        /* Uçuşan Kalp Animasyonu */
+        /* Uçuşan Kalpler */
         .heart {
-            position: absolute; color: #ff4d4d; font-size: 25px;
+            position: absolute; color: #ff4d4d; font-size: 28px;
             pointer-events: none; z-index: 1;
             animation: fly linear forwards;
         }
@@ -89,7 +71,7 @@
             <img src="nehir_foto.png" alt="Nehir">
         </div>
         
-        <div class="heart-icon">❤️</div>
+        <div class="main-heart">❤️</div>
         <h1>İyi ki doğdun Nehir! 🥳</h1>
         <p class="love-msg">Seni Seviyorum</p>
     </div>
