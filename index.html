@@ -8,54 +8,65 @@
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #000 !important;
-            /* SAYFAYI TAM MERKEZLEME */
             display: flex; justify-content: center; align-items: center;
             overflow: hidden; font-family: 'Segoe UI', sans-serif;
+            flex-direction: column;
         }
 
         .main-container {
             text-align: center; z-index: 100;
             display: flex; flex-direction: column; align-items: center;
-            /* DÜZELTME: Yukarı kaymayı önlemek için otomatik hizalama */
-            justify-content: center;
         }
 
         /* Fotoğraf çerçevesi */
         .photo-box {
-            width: 300px; /* İstediğin gibi büyük boyut */
-            height: 300px;
+            /* DÜZELTME: Yuvarlağı ve fotoğrafı küçülttük (250px -> 180px) */
+            width: 180px; 
+            height: 180px;
             border-radius: 50%;
-            border: 5px solid #fff;
-            overflow: hidden !important;
-            box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
+            border: 4px solid #fff;
+            overflow: hidden !important; /* Taşmayı önler */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            margin-bottom: 15px; /* Kalbe yaklaştırmak için */
             display: flex; justify-content: center; align-items: center;
             position: relative;
         }
 
         .photo-box img {
-            width: 140%; 
-            height: 140%; 
-            object-fit: cover;
-            /* FOTOĞRAFI SOLA KAYDIRMA: %38 değeri resmi sola çeker */
-            object-position: 38% 45%; 
+            /* Fotoğrafı yuvarlağa tam oturtma ayarı */
+            width: 155%; /* Büyüttüğümüz resmin dairesel alanı tam doldurması için */
+            height: 155%; 
+            object-fit: cover; /* Bu ayar yuvarlağın içini tam sığdırır */
+            
+            /* Fotoğrafı çerçevenin içinden sağa (%52) ve yukarı (%45) kaydırıp tam merkezledik */
+            object-position: 52% 45%; 
+            
             border-radius: 50%;
         }
 
-        /* Yazı ve Kalp Düzeni */
-        .main-heart { font-size: 55px; margin-bottom: 10px; }
-        h1 { color: white; font-size: 2.5rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .love-msg { color: #ff4d4d; font-size: 2rem; font-weight: bold; text-shadow: 0 0 15px rgba(255,77,77,0.5); }
+        /* Kalp simgesi ve yazılar */
+        .main-heart { font-size: 50px; margin-bottom: 5px; }
+        h1 { color: white; font-size: 2.2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        
+        /* DÜZELTME: "Seni Seviyorum" yazısını yukarı kaydırdık ve yazı tipini büyüttük */
+        .love-msg { 
+            color: #ff4d4d; 
+            font-size: 1.8rem; /* Yazıyı azıcık büyüttük */
+            font-weight: bold; 
+            margin-top: 5px; /* Üst boşluğu kıstık */
+            text-shadow: 0 0 15px rgba(255,77,77,0.5); 
+        }
 
-        /* Uçuşan Kalpler */
+        /* Uçuşan Kalp Animasyonu */
         .heart {
-            position: absolute; color: #ff4d4d; font-size: 25px;
+            position: absolute; color: #ff4d4d; font-size: 22px;
             pointer-events: none; z-index: 1;
             animation: fly linear forwards;
         }
 
         @keyframes fly {
             0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: translateY(100vh) scale(1); }
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
     </style>
@@ -81,7 +92,7 @@
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 6000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 350);
     </script>
 </body>
 </html>
