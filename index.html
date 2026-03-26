@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nehir'e Özel ❤️</title>
+    <title>Nehir için Sürpriz ❤️</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
@@ -11,12 +11,12 @@
             overflow: hidden; font-family: 'Arial', sans-serif; 
         }
 
-        /* 1. NET HACKER YAZILARI (Şeffaf Değil) */
+        /* 1. HACKER YAZILARI (Şeffaf Değil, Net ve Arka Planda) */
         #matrix-canvas {
             position: fixed; top: 0; left: 0; z-index: 1;
         }
 
-        /* 2. GERİ SAYIM VE SIRALI MESAJ (Yazı -> Kalp) */
+        /* 2. GERİ SAYIM VE SIRALI MESAJ */
         #intro-overlay {
             position: fixed; inset: 0; z-index: 10;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -29,11 +29,12 @@
         .pink-text { font-size: 3.5rem; color: #ff80ab; text-shadow: 0 0 20px #ff80ab; text-align: center; }
         .giant-heart { font-size: 160px; color: #ff80ab; margin-top: 10px; filter: drop-shadow(0 0 25px #ff80ab); }
 
-        /* 3. SON EKRAN (Kalp Fotoğrafın Altında) */
+        /* 3. SON EKRAN (Kalp Fotoğrafın Altında ve Kalpler Uçuşuyor) */
         #final-page {
             position: fixed; inset: 0; z-index: 20;
             display: none; flex-direction: column; justify-content: center; align-items: center;
-            background: black; text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* Yazıların görünmesi için hafif şeffaf arka plan */
+            text-align: center;
         }
 
         .circle-frame {
@@ -41,7 +42,7 @@
             border: 5px solid #fff; overflow: hidden;
             box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px; /* Alttaki kalp için boşluk */
+            margin-bottom: 20px;
         }
 
         .circle-frame img {
@@ -49,7 +50,6 @@
             object-position: 38% 45%; 
         }
 
-        /* Kalp Artık Fotoğrafın Altında */
         .red-heart-under { font-size: 70px; margin-bottom: 15px; animation: pulse 1.5s infinite; }
         
         @keyframes pulse {
@@ -58,9 +58,10 @@
             100% { transform: scale(1); }
         }
 
-        .final-title { color: white; font-size: 2.6rem; margin-bottom: 10px; }
+        .final-title { color: white; font-size: 2.6rem; margin-bottom: 10px; text-shadow: 0 0 10px black; }
         .final-sub { color: #ff4d4d; font-size: 2.2rem; font-weight: bold; text-shadow: 0 0 15px #ff4d4d; }
 
+        /* UÇUŞAN KALPLER */
         .rain-heart {
             position: absolute; color: #ff4d4d; pointer-events: none;
             z-index: 15; animation: fall linear forwards;
@@ -105,22 +106,23 @@
         const drops = Array(Math.floor(columns)).fill(1);
 
         function drawMatrix() {
-            // Arka planı daha az şeffaf yaparak yazıları netleştirdik
+            // Siyah arka planı temizle ama iz bıraksın (0.15 netlik sağlar)
             ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = "#ff80ab"; // Net pembe
+            ctx.fillStyle = "#ff80ab"; // Net pembe hacker rengi
             ctx.font = "bold " + fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 
-                // Dağınık iniş için rastgelelik
+                // Dağınık iniş: Bazıları daha erken başa döner
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) drops[i] = 0;
                 drops[i]++;
             }
         }
+        // Matrix akışını asla durdurmuyoruz
         const mInterval = setInterval(drawMatrix, 50);
 
         let count = 3;
@@ -139,10 +141,10 @@
                 msgGroup.style.display = 'flex';
                 
                 setTimeout(() => {
+                    // İlk siyah perdeyi kaldırıyoruz ama matrix arkada çalışmaya devam ediyor
                     intro.style.display = 'none';
-                    canvas.style.display = 'none';
-                    clearInterval(mInterval);
                     finalPage.style.display = 'flex';
+                    // Uçuşan kalpleri başlat
                     setInterval(makeHeart, 150); 
                 }, 2500);
             }
@@ -158,6 +160,12 @@
             document.body.appendChild(h);
             setTimeout(() => h.remove(), 4000);
         }
+
+        // Ekran boyutu değişirse canvas'ı güncelle
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
